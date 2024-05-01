@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { loginUser } from '../services/userService';
 import { useUser } from '../UserContext';
-import { Link } from "react-router-dom"
+import { Link, Navigate  } from "react-router-dom"
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { userData, setUserData } = useUser(); // Получаем userData и setUserData из контекста
   const [message, setMessage] = useState("");
+  const [redirect, setRedirect] = useState(false); // Состояние для редиректа
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,11 +18,13 @@ const Login = () => {
       setMessage(response); // Устанавливаем сообщение об ошибке
     } else {
       setMessage(""); // Очищаем сообщение об ошибке
+      setRedirect(true); // Устанавливаем значение true для редиректа
     }
   };
 
   return (
     <div>
+      {redirect && <Navigate  to="/profile" />} {/* Редирект, если redirect === true */}
       <form onSubmit={handleLogin}>
         <input
           type="email"
