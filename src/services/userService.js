@@ -1,7 +1,7 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from './firebase';
 
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, password, setUserData) => {
   try {
     const usersCollection = collection(db, "users");
     const q = query(usersCollection, where("email", "==", email));
@@ -11,13 +11,17 @@ export const loginUser = async (email, password) => {
       return "Пользователь с такой почтой не найден";
     }
 
-    let userData = {};
+    let userData = null;
     querySnapshot.forEach((doc) => {
-      userData = doc.data();
+      const userDataFromDB = doc.data();
+      if (userDataFromDB.password === password) {
+        userData = userDataFromDB;
+      }
     });
 
-    if (userData.password === password) {
-      return userData;
+    if (userData) {
+      setUserData(userData); // Устанавливаем данные пользователя в контекст
+      return null; // Возвращаем null, чтобы компонент мог отличить успешный вход от ошибки
     } else {
       return "Неверный пароль";
     }
