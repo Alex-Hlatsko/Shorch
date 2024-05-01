@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { createUser } from '../services/userService';
-import { useUser } from '../UserContext'; // Импортируем хук useUser
+import { useUser } from '../UserContext';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -9,24 +9,24 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const { setUserData } = useUser(); // Получаем функцию setUserData из контекста
-  const [redirect, setRedirect] = useState(false); // Состояние для редиректа
+  const { setUserData } = useUser(); 
+  const [redirect, setRedirect] = useState(false);
 
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Проверка, что пароли совпадают
+    // check passwords
     if (password !== confirmPassword) {
-      setMessage("Пароли не совпадают");
+      setMessage("Password mismatch");
       return;
     }
 
-    // Регистрация пользователя с передачей setUserData в createUser
+    // Registering a user by passing setUserData to createUser
     const response = await createUser(name, email, password, setUserData);
     if (response === "success") {
-      setMessage("Регистрация успешна");
-      setRedirect(true); // Устанавливаем значение true для редиректа
+      setMessage("Registration successful");
+      setRedirect(true); // Set the value to true for the redirect
     } else {
       setMessage(response);
     }
@@ -34,7 +34,7 @@ const Register = () => {
 
   return (
     <div>
-      {redirect && <Navigate  to="/profile" />} {/* Редирект, если redirect === true */}
+      {redirect && <Navigate  to="/profile" />} {/* Redirect if redirect === true */}
       <h1>Registration</h1>
       <form onSubmit={handleRegister}>
         <input

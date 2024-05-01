@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Scan from './pages/Scan';
 import Cart from './pages/Cart';
 
+
 function App() {
   return (
     <UserProvider>

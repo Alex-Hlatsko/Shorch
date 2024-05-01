@@ -6,25 +6,25 @@ import { Link, Navigate  } from "react-router-dom"
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { userData, setUserData } = useUser(); // Получаем userData и setUserData из контекста
+  const { userData, setUserData } = useUser();
   const [message, setMessage] = useState("");
-  const [redirect, setRedirect] = useState(false); // Состояние для редиректа
+  const [redirect, setRedirect] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const response = await loginUser(email, password, setUserData); // Передаем setUserData как аргумент
+    const response = await loginUser(email, password, setUserData);
     if (response) {
-      setMessage(response); // Устанавливаем сообщение об ошибке
+      setMessage(response);
     } else {
-      setMessage(""); // Очищаем сообщение об ошибке
-      setRedirect(true); // Устанавливаем значение true для редиректа
+      setMessage("");
+      setRedirect(true);
     }
   };
 
   return (
     <div>
-      {redirect && <Navigate  to="/profile" />} {/* Редирект, если redirect === true */}
+      {redirect && <Navigate  to="/profile" />}
       <form onSubmit={handleLogin}>
         <input
           type="email"
@@ -40,18 +40,19 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Войти</button>
+        <button type="submit">Login</button>
       </form>
       <p>{message}</p>
-      {/* Вывод данных пользователя из контекста */}
+     
       {userData && (
         <div>
-          <h2>Данные пользователя:</h2>
-          <p>Имя: {userData.name}</p>
-          <p>Почта: {userData.email}</p>
-          <p>Продукты: {userData.products.join(", ")}</p>
+          <h2>User data:</h2>
+          <p>Name: {userData.name}</p>
+          <p>Email: {userData.email}</p>
+          <p>Products: {userData.products.join(", ")}</p>
         </div>
       )}
+      <Link to="/register">Registration</Link>
       <Link to="/">Back</Link>
     </div>
 
