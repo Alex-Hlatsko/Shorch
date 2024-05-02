@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, getDoc, doc } from "firebase/firestore";
 import { db } from './firebase';
 import { useUser } from '../UserContext'; // Импортируем хук useUser
 
@@ -54,3 +54,24 @@ export const createUser = async (name, email, password, setUserData) => { // Д�
       return "Ошибка при регистрации";
     }
   };
+
+  export const getProductsByIds = async (productIds) => {
+    try {
+      const promises = productIds.map(async (productId) => {
+        const docRef = doc(db, "products", productId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          return docSnap.data();
+        } else {
+          return null; // Если продукт не найден, возвращаем null
+        }
+      });
+  
+      const productResults = await Promise.all(promises);
+      return productResults.filter(Boolean); // Убираем null значения из результата
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  };
+
