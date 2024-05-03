@@ -32,6 +32,17 @@ const Product = ({ id, title, desc, price }) => {
     }
   };
 
+  const handleVibration = () => {
+  // Проверяем поддержку API вибрации
+  if ('vibrate' in navigator) {
+    // Задаем паттерн вибрации (время в миллисекундах)
+    navigator.vibrate([200]);
+  } else {
+    console.error('Vibration API not supported in this browser.');
+  }
+};
+
+
   const handleRemoveProduct = async (productId) => {
     try {
       if (!userData) return;
@@ -68,6 +79,7 @@ const Product = ({ id, title, desc, price }) => {
           } else {
             setMessageText('Incorrect word, try again');
             setShowMessage(true);
+            handleVibration(); // Вызываем функцию для вибрации
             setTimeout(() => {
               setMessageText('');
               setShowMessage(false);
