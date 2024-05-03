@@ -6,11 +6,13 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Scan from './pages/Scan';
 import Cart from './pages/Cart';
+import {ProductProvider} from './ProductContext';
 
 
 function App() {
   return (
     <UserProvider>
+      <ProductProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Profile />} />
@@ -21,6 +23,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
+      </ProductProvider>
     </UserProvider>
   );
 }

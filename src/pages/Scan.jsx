@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useUser } from '../UserContext';
 import { Link, Navigate  } from "react-router-dom"
+import QrReader from '../components/QrReader';
 
 
 const Scan = () => {
@@ -11,10 +12,14 @@ const Scan = () => {
     return <Navigate to="/login" />;
   }
 
+  const [qrState, setQrState] = useState(true);
+
   return (
     <>
-    <div>Scan</div>
-    <Link to="/profile">Back</Link>
+    <div>
+      <div><Link to="/profile" onClick={() => setQrState(false)}>Back</Link></div>
+      {qrState && <QrReader />}
+    </div>
     </>
   )
 }
