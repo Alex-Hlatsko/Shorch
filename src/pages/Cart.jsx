@@ -43,8 +43,9 @@ const Cart = () => {
             <ul>
               {productData.map((product, index) => (
                 <li key={index}>
-                  {/* Используем компонент Product для каждого продукта */}
+                  {/* Передаем айдишник продукта в компонент Product */}
                   <Product
+                    id={product.id}
                     title={product.title}
                     desc={product.desc}
                     price={product.price}

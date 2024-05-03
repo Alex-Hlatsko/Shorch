@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, addDoc, getDoc, doc } from "firebase/firestore";
+import { collection, query, where, getDocs, addDoc, getDoc, doc, arrayRemove, updateDoc } from "firebase/firestore";
 import { db } from './firebase';
 import { useUser } from '../UserContext'; // Импортируем хук useUser
 
@@ -74,4 +74,26 @@ export const createUser = async (name, email, password, setUserData) => { // Д�
       return [];
     }
   };
-
+  export const removeProduct = async (email, productId) => {
+    try {
+      // Получаем ссылку на коллекцию пользователей и создаем запрос для поиска пользователя по email
+      const usersCollection = collection(db, 'users');
+      const q = query(usersCollection, where('email', '==', email));
+  
+      // Выполняем запрос и получаем результат
+      const querySnapshot = await getDocs(q);
+  
+      // Если пользователь найден, обновляем его документ, удаляя продукт из массива
+      querySnapshot.forEach(async (doc) => {
+        await updateDoc(doc.ref, {
+          products: arrayRemove(productId)
+        });
+      });
+  
+      console.log('Product removed successfully');
+      return 'success';
+    } catch (error) {
+      console.error('Error removing product:', error);
+      throw new Error('Error removing product');
+    }
+  };
