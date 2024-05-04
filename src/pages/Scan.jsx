@@ -46,7 +46,7 @@ const Scan = () => {
         delay={300}
         onError={handleError}
         onResult={handleScan}
-        facingMode={facingMode} // Устанавливаем режим камеры
+        constraints={{ facingMode: 'environment' }}
         style={{ width: '100%' }}
       />
        {/* Кнопка для переключения камеры */}
