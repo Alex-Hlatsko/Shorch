@@ -9,7 +9,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
-  const { setUserData } = useUser(); 
+  const { setUserData } = useUser();
   const [redirect, setRedirect] = useState(false);
 
 
@@ -33,42 +33,43 @@ const Register = () => {
   };
 
   return (
-    <div>
-      {redirect && <Navigate  to="/profile" />} {/* Redirect if redirect === true */}
-      <h1>Registration</h1>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Register</button>
-      </form>
-      <p>{message}</p>
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+    <div className='container'>
+      {redirect && <Navigate to="/profile" />} {/* Redirect if redirect === true */}
+      <div className="form_section">
+        <form onSubmit={handleRegister}>
+          <h1 className='text-center'>Registration</h1>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className='btn btn-primary'>Register</button>
+          <p>Already have an account? <Link to="/login">Login</Link></p>
+        </form>
+      </div>
     </div>
   );
 };

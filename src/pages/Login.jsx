@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from '../services/userService';
 import { useUser } from '../UserContext';
-import { Link, Navigate  } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,37 +23,31 @@ const Login = () => {
   };
 
   return (
-    <div>
-      {redirect && <Navigate  to="/profile" />}
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      <p>{message}</p>
-     
-      {userData && (
-        <div>
-          <h2>User data:</h2>
-          <p>Name: {userData.name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Products: {userData.products.join(", ")}</p>
-        </div>
-      )}
-      <Link to="/register">Registration</Link>
-      <Link to="/">Back</Link>
+    <div className="container">
+      {redirect && <Navigate to="/profile" />}
+      <div className="form_section">
+        <form onSubmit={handleLogin}>
+        <h1 className="text-center">Login</h1>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className="btn btn-primary">Login</button>
+          <p>Don't have an account? <Link to="/register">Register</Link></p>
+        </form>
+
+
+      </div>
     </div>
 
   );

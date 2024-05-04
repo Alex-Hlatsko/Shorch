@@ -6,8 +6,6 @@ import {QrReader} from 'react-qr-reader';
 const Scan = () => {
   const navigate = useNavigate();
   const [result, setResult] = useState(null);
-  const [facingMode, setFacingMode] = useState('environment'); // Начальное значение: обычная камера
-  const qrRef = useRef(null); // Создаем ссылку на компонент QrReader
 
   const handleScan = async (data) => {
     if (data) {
@@ -34,10 +32,7 @@ const Scan = () => {
     console.error(err);
   };
 
-  const toggleFacingMode = () => {
-    // Переключение камеры между фронтальной и обычной
-    setFacingMode((prevMode) => (prevMode === 'environment' ? 'user' : 'environment'));
-  };
+ 
 
   return (
     <div>
@@ -49,8 +44,6 @@ const Scan = () => {
         constraints={{ facingMode: 'environment' }}
         style={{ width: '100%' }}
       />
-       {/* Кнопка для переключения камеры */}
-       <button onClick={toggleFacingMode}>Toggle Camera</button>
     </div>
   );
 };
