@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../UserContext';
 import { Link, Navigate } from "react-router-dom";
 import { getProductsByIds } from '../services/userService';
-import Product from '../components/Product'; // Импортируем компонент Product
+import Product from '../components/Product';
+import Navigation from '../components/Navigation';
+import TopBar from '../components/TopBar';
 
 const Cart = () => {
   const { userData } = useUser();
@@ -31,35 +33,39 @@ const Cart = () => {
   if (!userData) {
     return <Navigate to="/login" />;
   }
-  
+
   return (
-    <>
-      <div>Cart</div>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div>
-          {productData.length > 0 ? (
-            <ul>
-              {productData.map((product, index) => (
-                <li key={index}>
-                  {/* Передаем айдишник продукта в компонент Product */}
-                  <Product
-                    id={product.id}
-                    title={product.title}
-                    desc={product.desc}
-                    price={product.price}
-                  />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No products found.</p>
-          )}
-        </div>
-      )}
-      <Link to="/profile">Back</Link>
-    </>
+    <div>
+      <TopBar />
+      <Navigation />
+      <div className="content">
+        <h1>Cart:</h1>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div>
+            {productData.length > 0 ? (
+              <ul>
+                {productData.map((product, index) => (
+                  <li key={index}>
+                    {/* Передаем айдишник продукта в компонент Product */}
+                    <Product
+                      id={product.id}
+                      title={product.title}
+                      desc={product.desc}
+                      price={product.price}
+                    />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No products found.</p>
+            )}
+          </div>
+        )}
+        <Link to="/profile" className='btn btn-secondary'>Back</Link>
+      </div>
+    </div>
   );
 };
 

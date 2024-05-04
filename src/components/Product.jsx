@@ -33,14 +33,14 @@ const Product = ({ id, title, desc, price }) => {
   };
 
   const handleVibration = () => {
-  // Проверяем поддержку API вибрации
-  if ('vibrate' in navigator) {
-    // Задаем паттерн вибрации (время в миллисекундах)
-    navigator.vibrate([200]);
-  } else {
-    console.error('Vibration API not supported in this browser.');
-  }
-};
+    // Проверяем поддержку API вибрации
+    if ('vibrate' in navigator) {
+      // Задаем паттерн вибрации (время в миллисекундах)
+      navigator.vibrate([200]);
+    } else {
+      console.error('Vibration API not supported in this browser.');
+    }
+  };
 
 
   const handleRemoveProduct = async (productId) => {
@@ -99,20 +99,16 @@ const Product = ({ id, title, desc, price }) => {
 
 
   return (
-    <div>
-      <h3>{title}</h3>
-      <p>Description: {desc}</p>
-      <p>Price: ${price}</p>
-      <button onClick={() => handleRemoveProduct(id)}>Remove</button>
-      {/* Вывод состояния микрофона */}
-      {isMicrophoneWorking ? (
-        <p>Microphone is working</p>
-      ) : (
-        <p>Microphone is not working</p>
-      )}
+    <div className='card'>
+      <div className="card-body">
+        <h3 className='card-title'>{title}</h3>
+        <p>Description: <span className='card-subtitle mb-2 text-body-secondary'>{desc}</span></p>
+        <p className='card-text'>Price: ${price}</p>
+        <button onClick={() => handleRemoveProduct(id)} className='btn btn-danger'>Remove</button>
 
-      {/* Компонент для вывода сообщений */}
-      {showMessage && <MessageOverlay message={messageText} duration={3000} onClose={() => setShowMessage(false)} />}
+        {/* Компонент для вывода сообщений */}
+        {showMessage && <MessageOverlay message={messageText} duration={3000} onClose={() => setShowMessage(false)} />}
+      </div>
     </div>
   );
 };

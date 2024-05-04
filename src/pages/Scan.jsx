@@ -1,7 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {QrReader} from 'react-qr-reader';
+import { QrReader } from 'react-qr-reader';
+import Navigation from '../components/Navigation';
+import TopBar from '../components/TopBar';
 
 const Scan = () => {
   const navigate = useNavigate();
@@ -14,12 +16,12 @@ const Scan = () => {
         const response = await axios.get(data);
         console.log('Product data:', response.data);
         const { fields } = response.data;
-        
+
         // Создаем строку параметров запроса на основе данных из fields
         const queryParams = Object.entries(fields)
           .map(([key, value]) => `${key}=${encodeURIComponent(value.stringValue || value.integerValue)}`)
           .join('&');
-        
+
         // Редирект на страницу ProductDetails с параметрами запроса
         navigate(`/product-details?${queryParams}`);
       } catch (error) {
@@ -32,18 +34,22 @@ const Scan = () => {
     console.error(err);
   };
 
- 
+
 
   return (
     <div>
-      <h2>Scan QR Code</h2>
-      <QrReader
-        delay={300}
-        onError={handleError}
-        onResult={handleScan}
-        constraints={{ facingMode: 'environment' }}
-        style={{ width: '100%' }}
-      />
+      <TopBar />
+      <Navigation />
+      <div className="content">
+        <h2>Scan QR Code:</h2>
+        <QrReader
+          delay={300}
+          onError={handleError}
+          onResult={handleScan}
+          constraints={{ facingMode: 'environment' }}
+          style={{ width: '100%' }}
+        />
+      </div>
     </div>
   );
 };
