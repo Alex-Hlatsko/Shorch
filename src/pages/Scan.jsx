@@ -29,6 +29,7 @@ const Scan = () => {
         delay={300}
         onError={handleError}
         onScan={handleScan}
+        facingMode="environment" // Используем заднюю камеру
         style={{ width: '100%' }}
       />
     </div>
