@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Scan from './pages/Scan';
 import Cart from './pages/Cart';
+import ProductInfo from './pages/ProductInfo';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/scan" element={<Scan />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path='/add' element={<ProductInfo />} />
         </Routes>
       </Router>
     </UserProvider>
