@@ -13,6 +13,7 @@ const Profile = () => {
             <div>Home</div>
             <NavLink to="/scan">Scan</NavLink>
             <NavLink to="/cart">Cart</NavLink>
+            <NavLink to="/product-details?id=5555&title=Title5&desc=desc5&price=300">ooooo</NavLink>
             {/* show users data */}
             {userData && (
                 <div>

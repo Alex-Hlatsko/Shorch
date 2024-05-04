@@ -97,3 +97,28 @@ export const createUser = async (name, email, password, setUserData) => { // Д�
       throw new Error('Error removing product');
     }
   };
+
+  export const updateUserProduct = async (email, newProducts) => {
+    try {
+      // Получаем ссылку на коллекцию пользователей и создаем запрос для поиска пользователя по email
+      const usersCollection = collection(db, 'users');
+      const q = query(usersCollection, where('email', '==', email));
+  
+      // Выполняем запрос и получаем результат
+      const querySnapshot = await getDocs(q);
+  
+      // Если пользователь найден, обновляем его документ, добавляя новый продукт в массив
+      querySnapshot.forEach(async (doc) => {
+        await updateDoc(doc.ref, {
+          products: newProducts
+        });
+      });
+  
+      console.log('User products updated successfully');
+      return 'success';
+    } catch (error) {
+      console.error('Error updating user products:', error);
+      throw new Error('Error updating user products');
+    }
+  };
+  

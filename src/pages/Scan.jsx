@@ -1,20 +1,36 @@
 import React from 'react';
-import { useUser } from '../UserContext';
-import { Link, Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {QrReader} from 'react-qr-reader';
 
 const Scan = () => {
-  const { userData } = useUser(); // Получение данных пользователя из контекста
-  
-  // Если данных пользователя нет, перенаправляем на страницу входа
-  if (!userData) {
-    return <Navigate to="/login" />;
-  }
+  const navigate = useNavigate();
+
+  const handleScan = (data) => {
+    if (data) {
+      // Парсим JSON из полученных данных
+      const productData = JSON.parse(data);
+
+      // Формируем путь с параметрами для редиректа
+      const path = `/product-details?id=${productData.fields.id.stringValue}&title=${productData.fields.title.stringValue}&desc=${productData.fields.desc.stringValue}&price=${productData.fields.price.integerValue}`;
+
+      // Редирект на страницу ProductDetails с параметрами пути
+      navigate(path);
+    }
+  };
+
+  const handleError = (err) => {
+    console.error(err);
+  };
 
   return (
     <div>
       <h2>Scan QR Code</h2>
-      <QrReader />
-      <Link to="/profile">Back</Link>
+      <QrReader
+        delay={300}
+        onError={handleError}
+        onScan={handleScan}
+        style={{ width: '100%' }}
+      />
     </div>
   );
 };
