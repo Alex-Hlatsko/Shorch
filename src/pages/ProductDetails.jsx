@@ -1,7 +1,9 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../UserContext';
-import { updateUserProduct } from '../services/userService'; // Импортируем функцию добавления продукта пользователю
+import { updateUserProduct } from '../services/userService';
+import Navigation from '../components/Navigation';
+import TopBar from '../components/TopBar';
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -38,13 +40,21 @@ const ProductDetails = () => {
 
   return (
     <div>
-      <h2>Product Details</h2>
-      <p>ID: {id}</p>
-      <p>Title: {title}</p>
-      <p>Description: {desc}</p>
-      <p>Price: ${price}</p>
-      <button onClick={handleCancel}>Cancel</button>
-      <button onClick={handleAddToCart}>Add to Cart</button>
+      <TopBar />
+      <Navigation />
+      <div className="content">
+        <div className="card">
+          <div className="card-body">
+            <h2>Product Details:</h2>
+            <p>ID: {id}</p>
+            <p className='card-title'>Title: {title}</p>
+            <p>Description: <span className='card-subtitle'>{desc}</span></p>
+            <p className='card-text'>Price: ${price}</p>
+            <button onClick={handleCancel} className='btn btn-secondary me-4'>Cancel</button>
+            <button onClick={handleAddToCart} className='btn btn-success'>Add to Cart</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
