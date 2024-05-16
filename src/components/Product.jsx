@@ -102,7 +102,7 @@ const Product = ({ id, title, desc, price }) => {
     <div className='card'>
       <div className="card-body">
         <h3 className='card-title'>{title}</h3>
-        <p>Description: <span className='card-subtitle mb-2 text-body-secondary'>{desc}</span></p>
+        <p>Description: <span className='card-subtitle mb-2'>{desc}</span></p>
         <p className='card-text'>Price: ${price}</p>
         <button onClick={() => handleRemoveProduct(id)} className='btn btn-danger'>Remove</button>
 

@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background-color: #544C4C !important;
+  color: #fff !important;
+}
 
 a {
   text-decoration: none !important;
@@ -27,14 +31,21 @@ ul{
   padding: 40px 90px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
+.btn-primary{
+  background-color: #BA1616 !important;
+  border: 1px solid #BA1616 !important;
+}
 .form_section form input {
   padding: 5px 10px;
   margin: 10px 0;
   border-radius: 5px;
   border: 1px solid #595959;
 }
-
+.card{
+  border: 2px solid #BA1616 !important;
+  background-color: #544C4C !important;
+  color: #fff !important;
+}
 .form_section form button {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -48,6 +59,7 @@ ul{
   padding: 20px 15px;
   text-align: right;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #382828 !important;
   display: flex;
   align-items: center;
   justify-content: right;
@@ -73,6 +85,7 @@ ul{
   left: 0;
   z-index: 30;
   padding-top: 6rem;
+  background-color: #544C4C;
   box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -99,10 +112,10 @@ ul{
 
 }
 .navigation .mob_nav a.active {
-  color: #9e9e9e;
+  color: #BA1616;
 }
 .navigation .mob_nav a {
-  color: #3e3e3e;
+  color: #6d3838;
 }
 
 .navigation .mob_nav {
@@ -146,6 +159,7 @@ ul{
     height: 100%;
     padding: 15px 10px;
     box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.247);
+    background-color: #382828;
     border-radius: 1rem;
   }
 
